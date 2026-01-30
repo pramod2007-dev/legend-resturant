@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Legend Restaurant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        .contact-hero {
+            background: linear-gradient(rgba(10,10,10,0.85), rgba(10,10,10,0.9));
+            padding: 150px 0 80px;
+            text-align: center;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info-card {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .contact-info-card h2 {
+            color: var(--color-gold);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .contact-item-large {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--color-bg);
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 1px solid var(--color-border);
+        }
+
+        .contact-item-large:hover {
+            border-color: var(--color-gold);
+            transform: translateX(10px);
+        }
+
+        .contact-icon-large {
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gold);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item-large h3 {
+            color: var(--color-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-item-large p {
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .click-to-action {
+            color: var(--color-gold);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .contact-form-card {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .contact-form-card h2 {
+            color: var(--color-gold);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .map-container {
+            grid-column: span 2;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--color-border);
+            margin-top: 2rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quick-action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .quick-action-btn.phone {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        .quick-action-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 968px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">LEGEND<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="btn-icon theme-toggle" id="theme-toggle">
+                    <i class="fas fa-sun sun-icon"></i>
+                    <i class="fas fa-moon moon-icon"></i>
+                </button>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="contact-hero">
+        <div class="container">
+            <span class="section-subtitle" style="color: var(--color-gold); justify-content: center;">
+                Get In Touch
+            </span>
+            <h1 class="section-title" style="color: white; font-size: 3rem;">Contact Us</h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <!-- Contact Info -->
+                <div class="contact-info-card">
+                    <h2><i class="fas fa-info-circle"></i> Restaurant Info</h2>
+                    
+                    <div class="contact-item-large">
+                        <div class="contact-icon-large">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Address</h3>
+                            <p>4362+3CJ, A1 Highway</p>
+                            <p>Kalagedihena, Sri Lanka</p>
+                            <a href="https://maps.google.com" target="_blank" class="click-to-action">
+                                Get Directions <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item-large">
+                        <div class="contact-icon-large">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>077 787 2587</p>
+                            <p>Open daily until 11:30 PM</p>
+                            <a href="tel:0777872587" class="click-to-action">
+                                Call Now <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item-large">
+                        <div class="contact-icon-large" style="background: rgba(37, 211, 102, 0.1); color: #25D366;">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <p>Quick reservations & orders</p>
+                            <p>Usually responds in 10 minutes</p>
+                            <a href="https://wa.me/94777872587" target="_blank" class="click-to-action" style="color: #25D366;">
+                                Chat Now <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item-large">
+                        <div class="contact-icon-large">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Opening Hours</h3>
+                            <p><strong>Every Day:</strong> 10:30 AM - 11:30 PM</p>
+                            <p style="color: var(--color-gold);">Kitchen closes at 11:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <a href="tel:0777872587" class="quick-action-btn phone">
+                            <i class="fas fa-phone"></i> Call Restaurant
+                        </a>
+                        <a href="https://wa.me/94777872587" class="quick-action-btn whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-card">
+                    <h2><i class="fas fa-envelope"></i> Send Message</h2>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label>Your Name *</label>
+                            <input type="text" required placeholder="John Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" required placeholder="john@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="+94 77 123 4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Subject *</label>
+                            <select required>
+                                <option value="">Select a subject</option>
+                                <option value="reservation">Table Reservation</option>
+                                <option value="catering">Catering Inquiry</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="complaint">Complaint</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Message *</label>
+                            <textarea rows="4" required placeholder="How can we help you?"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Map -->
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.176717913177!2d80.0140313147785!3d7.30345299472805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3113f3b5d5f03%3A0xa7e7c1f8f4f5e8e1!2sKalagedihena!5e0!3m2!1sen!2slk!4v1234567890"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">LEGEND<span>.</span></a>
+                    <p>Serving authentic Indian and Sri Lankan cuisine since 2015.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> 077 787 2587</p>
+                    <p><i class="fas fa-map-marker-alt"></i> A1, Kalagedihena</p>
+                    <p><i class="fas fa-envelope"></i> info@legendrestaurant.lk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Legend Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/94777872587" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will contact you shortly.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>

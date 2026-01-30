@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legend Restaurant | Kalagedihena</title>
+    <meta name="description" content="Legend Restaurant - Authentic Indian & Sri Lankan cuisine on A1 Highway, Kalagedihena. Best biryani, kottu roti & curries. Open daily until 11:30 PM. Call 077 787 2587">
+    
+    <!-- External Fonts & Icons Only -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4D03F;
+            --red: #DC2626;
+            --black: #0a0a0a;
+            --dark: #1a1a1a;
+        }
+        
+        [data-theme="light"] {
+            --bg: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --text: #1f2937;
+            --text-secondary: #4b5563;
+            --card: #ffffff;
+            --border: #e5e7eb;
+        }
+        
+        [data-theme="dark"] {
+            --bg: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text: #ffffff;
+            --text-secondary: #9ca3af;
+            --card: #1a1a1a;
+            --border: #2a2a2a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: transparent;
+            transition: all 0.3s;
+        }
+        
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        [data-theme="light"] nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--red); }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after { width: 100%; }
+        
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .icon-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--red);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            width: 25px;
+            height: 2px;
+            background: var(--text);
+            transition: 0.3s;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://kimi-web-img.moonshot.cn/img/pics.craiyon.com/542f2a64e0cfe8d2ddd5a32b8afa316b5fe0fda7.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            animation: fadeUp 1s ease;
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero h1 span {
+            color: var(--gold);
+            display: block;
+            font-size: 0.5em;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .info-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+        
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .info-item div h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-bottom: 0.2rem;
+        }
+        
+        .info-item div p {
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title h3 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: var(--text-secondary);
+        }
+        
+        /* Menu Cards */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img img {
+            transform: scale(1.1);
+        }
+        
+        .tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--red);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .card-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        .add-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        
+        .add-cart:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+        
+        /* Reviews */
+        .reviews {
+            background: var(--bg-secondary);
+        }
+        
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .review-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .stars {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .review-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--black);
+        }
+        
+        /* Contact */
+        .contact-box {
+            background: var(--card);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item-lg {
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .contact-item-lg:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+        
+        .contact-item-lg i {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item-lg h4 {
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+        
+        .contact-item-lg p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: transform 0.3s;
+            z-index: 999;
+            text-decoration: none;
+        }
+        
+        .whatsapp:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h2 {
+            color: var(--gold);
+        }
+        
+        .close {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--gold);
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-align: right;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social a:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--bg);
+                flex-direction: column;
+                padding: 5rem 2rem;
+                transition: right 0.3s;
+                border-left: 1px solid var(--border);
+            }
+            
+            .nav-links.active { right: 0; }
+            
+            .mobile-menu { display: flex; }
+            
+            .info-bar {
+                position: relative;
+                grid-template-columns: 1fr;
+            }
+            
+            .hero { padding-top: 80px; }
+        }
+        
+        /* Theme Toggle Icons */
+        .sun, .moon {
+            position: absolute;
+            transition: all 0.3s;
+        }
+        
+        [data-theme="dark"] .sun { opacity: 1; transform: rotate(0); }
+        [data-theme="dark"] .moon { opacity: 0; transform: rotate(-90deg); }
+        [data-theme="light"] .sun { opacity: 0; transform: rotate(90deg); }
+        [data-theme="light"] .moon { opacity: 1; transform: rotate(0); }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">LEGEND<span>.</span></a>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        
+        <div class="controls">
+            <button class="icon-btn" onclick="toggleCart()" style="position: relative;">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cartCount" style="display: none;">0</span>
+            </button>
+            
+            <button class="icon-btn" onclick="toggleTheme()" style="position: relative;">
+                <i class="fas fa-sun sun"></i>
+                <i class="fas fa-moon moon"></i>
+            </button>
+            
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home" style="padding: 0;">
+        <div class="hero-content">
+            <div class="badge">
+                <i class="fas fa-star"></i> 4.3 (146 Google Reviews)
+            </div>
+            <h1>
+                <span>Est. 2015</span>
+                Legend Restaurant
+            </h1>
+            <p>Authentic Indian & Sri Lankan Cuisine on A1 Highway, Kalagedihena. Experience our award-winning biryani, fresh kottu, and signature curries.</p>
+            <div class="buttons">
+                <a href="#menu" class="btn btn-primary">
+                    <i class="fas fa-utensils"></i> View Menu
+                </a>
+                <a href="tel:0777872587" class="btn btn-secondary">
+                    <i class="fas fa-phone"></i> 077 787 2587
+                </a>
+            </div>
+        </div>
+        
+        <div class="info-bar">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h4>Location</h4>
+                    <p>A1, Kalagedihena, Sri Lanka</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h4>Open Daily</h4>
+                    <p>10:30 AM - 11:30 PM</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-concierge-bell"></i>
+                <div>
+                    <h4>Services</h4>
+                    <p>Dine-in • Takeaway</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                    <h4>Reservations</h4>
+                    <p>077 787 2587</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <div class="section-title">
+            <h2>Our Menu</h2>
+            <h3>Signature Dishes</h3>
+            <p>Crafted with passion using authentic recipes</p>
+        </div>
+        
+        <div class="menu-grid">
+            <!-- Chicken Biryani -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static.vecteezy.com/8028fa983261ffdb0ad9ed02c8466a0ba7f94b1c.jpg" alt="Chicken Biryani">
+                    <span class="tag">Chef's Pick</span>
+                </div>
+                <div class="card-content">
+                    <h3>Chicken Biryani</h3>
+                    <p>Fragrant basmati rice cooked with tender chicken, aromatic spices, and herbs. Served with raita.</p>
+                    <span class="price">Rs. 1,200</span>
+                    <button class="add-cart" onclick="addToCart(1, 'Chicken Biryani', 1200)">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chicken Kottu -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.hungrylankan.com/6a6985f7a2702847a4303ba08b5142eb6d45d791.jpeg" alt="Chicken Kottu">
+                    <span class="tag">Popular</span>
+                </div>
+                <div class="card-content">
+                    <h3>Chicken Kottu Roti</h3>
+                    <p>Sri Lankan street food favorite! Godamba roti chopped and stir-fried with chicken and spices.</p>
+                    <span class="price">Rs. 950</span>
+                    <button class="add-cart" onclick="addToCart(2, 'Chicken Kottu', 950)">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Tandoori Biryani -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static.vecteezy.com/8028fa983261ffdb0ad9ed02c8466a0ba7f94b1c.jpg" alt="Tandoori Biryani">
+                    <span class="tag">Spicy</span>
+                </div>
+                <div class="card-content">
+                    <h3>Tandoori Chicken Biryani</h3>
+                    <p>Smoky tandoori chicken pieces layered with saffron-infused rice and aromatic spices.</p>
+                    <span class="price">Rs. 1,500</span>
+                    <button class="add-cart" onclick="addToCart(3, 'Tandoori Biryani', 1500)">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Sri Lankan Thali -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg" alt="Sri Lankan Thali">
+                </div>
+                <div class="card-content">
+                    <h3>Sri Lankan Thali</h3>
+                    <p>Complete meal with rice, 3 curries, papadum, pickle, and dessert. Vegetarian available.</p>
+                    <span class="price">Rs. 1,200</span>
+                    <button class="add-cart" onclick="addToCart(4, 'Sri Lankan Thali', 1200)">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Egg Biryani -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://kimi-web-img.moonshot.cn/img/img.freepik.com/f232958d0b4c9fada65d6a68bdc56e664b330976.jpg" alt="Egg Biryani">
+                </div>
+                <div class="card-content">
+                    <h3>Egg Biryani</h3>
+                    <p>Basmati rice cooked with boiled eggs and traditional biryani spices. Mild and flavorful.</p>
+                    <span class="price">Rs. 900</span>
+                    <button class="add-cart" onclick="addToCart(5, 'Egg Biryani', 900)">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Seafood Rice -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.theflavorbender.com/e4eff3ca83f141ae0f4198943bf2439af55f3d80.jpg" alt="Seafood Fried Rice">
+                </div>
+                <div class="card-content">
+                    <h3>Seafood Fried Rice</h3>
+                    <p>Rice stir-fried with prawns, cuttlefish, and crab meat. Spicy Sri Lankan style.</p>
+                    <span class="price">Rs. 1,100</span>
+                    <button class="add-cart" onclick="addToCart(6, 'Seafood Fried Rice', 1100)">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <div class="section-title">
+            <h2>Testimonials</h2>
+            <h3>What Our Guests Say</h3>
+            <p>Rated 4.3 stars by 146 customers on Google</p>
+        </div>
+        
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Best biryani in Kalagedihena! The flavors are authentic Hyderabadi style, and the portions are generous. Perfect for family dinners."</p>
+                <div class="reviewer">
+                    <div class="avatar">AR</div>
+                    <div>
+                        <h4>Ahmed R.</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Local Guide</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="review-text">"Great ambiance and friendly staff. The kottu roti was amazing - lots of flavor and perfectly spicy. A must-visit on the A1 highway!"</p>
+                <div class="reviewer">
+                    <div class="avatar">PS</div>
+                    <div>
+                        <h4>Priya S.</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Food Blogger</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Love their butter chicken and fresh naan. The restaurant is clean and family-friendly. This is our regular stop when traveling to Kandy."</p>
+                <div class="reviewer">
+                    <div class="avatar">NF</div>
+                    <div>
+                        <h4>Nimal F.</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Regular Customer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Contact Us</h2>
+            <h3>Visit Legend Restaurant</h3>
+            <p>We'd love to serve you</p>
+        </div>
+        
+        <div class="contact-box">
+            <div class="contact-details">
+                <div class="contact-item-lg">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Address</h4>
+                    <p>4362+3CJ, A1 Highway<br>Kalagedihena, Sri Lanka</p>
+                </div>
+                
+                <div class="contact-item-lg">
+                    <i class="fas fa-phone"></i>
+                    <h4>Phone</h4>
+                    <p>077 787 2587<br>Open daily 10:30 AM - 11:30 PM</p>
+                </div>
+                
+                <div class="contact-item-lg">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>info@legendrestaurant.lk<br>reservations@legend.lk</p>
+                </div>
+                
+                <div class="contact-item-lg">
+                    <i class="fas fa-utensils"></i>
+                    <h4>Services</h4>
+                    <p>Dine-in<br>Takeaway Available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">LEGEND<span style="color: var(--red);">.</span></div>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Authentic Indian & Sri Lankan Cuisine since 2015</p>
+        
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            &copy; 2025 Legend Restaurant. All rights reserved.
+        </p>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/94777872587" class="whatsapp" target="_blank" title="Order via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+                <button class="close" onclick="toggleCart()">&times;</button>
+            </div>
+            <div id="cartItems">
+                <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">Your cart is empty</p>
+            </div>
+            <div class="total" id="cartTotal" style="display: none;"></div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="checkout()">
+                <i class="fab fa-whatsapp"></i> Order via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Shopping Cart System
+        let cart = JSON.parse(localStorage.getItem('legendCart')) || [];
+        
+        function updateCart() {
+            const count = document.getElementById('cartCount');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (totalItems > 0) {
+                count.textContent = totalItems;
+                count.style.display = 'flex';
+            } else {
+                count.style.display = 'none';
+            }
+            
+            renderCart();
+            localStorage.setItem('legendCart', JSON.stringify(cart));
+        }
+        
+        function addToCart(id, name, price) {
+            const existing = cart.find(item => item.id === id);
+            
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+            
+            updateCart();
+            showNotification(`${name} added to cart!`);
+        }
+        
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+        
+        function changeQuantity(id, delta) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+        
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const totalDiv = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">Your cart is empty</p>';
+                totalDiv.style.display = 'none';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                html += `
+                    <div class="cart-item">
+                        <div>
+                            <h4 style="color: var(--gold);">${item.name}</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary);">Rs. ${item.price}</p>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
+                            <button class="qty-btn" onclick="removeFromCart(${item.id})" style="color: var(--red); margin-left: 0.5rem;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            totalDiv.style.display = 'block';
+            totalDiv.textContent = `Total: Rs. ${total.toFixed(2)}`;
+        }
+        
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            renderCart();
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            let message = 'Hello Legend Restaurant! I would like to order:%0A%0A';
+            let total = 0;
+            
+            cart.forEach(item => {
+                message += `${item.name} x${item.quantity} - Rs. ${item.price * item.quantity}%0A`;
+                total += item.price * item.quantity;
+            });
+            
+            message += `%0ATotal: Rs. ${total.toFixed(2)}`;
+            
+            window.open(`https://wa.me/94777872587?text=${message}`, '_blank');
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+        
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                right: 30px;
+                background: var(--gold);
+                color: var(--black);
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 3000;
+                animation: slideIn 0.3s ease;
+            `;
+            notif.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(notif);
+            
+            setTimeout(() => {
+                notif.remove();
+            }, 3000);
+        }
+        
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        
+        // Initialize theme
+        document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        
+        // Mobile Menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Initialize cart
+        updateCart();
+        
+        // Close modal when clicking outside
+        document.getElementById('cartModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('cartModal')) {
+                toggleCart();
+            }
+        });
+    </script>
+</body>
+</html>

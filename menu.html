@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Legend Restaurant - Kalagedihena</title>
+    <meta name="description" content="Explore our menu featuring authentic Chicken Biryani, Egg Biryani, Tandoori Chicken, Fried Rice, Naan, and Sri Lankan curries.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Menu Specific Styles */
+        .menu-hero {
+            background: linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.9)), 
+                        url('https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg') center/cover;
+            padding: 150px 0 80px;
+            text-align: center;
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--color-gold);
+            background: transparent;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-gold);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .menu-card-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover .menu-card-image img {
+            transform: scale(1.1);
+        }
+
+        .spice-indicator {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .veg-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 25px;
+            height: 25px;
+            background: green;
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+        }
+
+        .menu-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card-title {
+            font-family: var(--font-primary);
+            font-size: 1.3rem;
+            color: var(--color-gold);
+        }
+
+        .menu-card-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--color-gold);
+        }
+
+        .menu-card-description {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 1rem;
+            background: var(--color-gold);
+            color: var(--color-black);
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .add-to-cart:hover {
+            background: var(--color-gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .add-to-cart i {
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">LEGEND<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <a href="order.html" class="btn-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" style="display: none;">0</span>
+                </a>
+                <button class="btn-icon theme-toggle" id="theme-toggle">
+                    <i class="fas fa-sun sun-icon"></i>
+                    <i class="fas fa-moon moon-icon"></i>
+                </button>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Hero -->
+    <section class="menu-hero">
+        <div class="container">
+            <span class="section-subtitle" style="color: var(--color-gold); justify-content: center; margin-bottom: 1rem;">
+                Delicious Cuisine
+            </span>
+            <h1 class="section-title" style="color: white; font-size: 3.5rem;">Our Menu</h1>
+            <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 1.5rem auto;">
+                Authentic Indian and Sri Lankan dishes prepared with fresh ingredients and traditional recipes
+            </p>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <div class="menu-categories">
+        <button class="category-btn active" data-category="all">All Items</button>
+        <button class="category-btn" data-category="biryani">Biryani</button>
+        <button class="category-btn" data-category="rice">Rice & Kottu</button>
+        <button class="category-btn" data-category="bread">Naan & Bread</button>
+        <button class="category-btn" data-category="curry">Curries</button>
+        <button class="category-btn" data-category="beverage">Beverages</button>
+    </div>
+
+    <!-- Menu Grid -->
+    <section class="section" style="padding-top: 0;">
+        <div class="menu-grid" id="menu-container">
+            <!-- Biryani Items -->
+            <div class="menu-card" data-category="biryani">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static.vecteezy.com/8028fa983261ffdb0ad9ed02c8466a0ba7f94b1c.jpg" alt="Chicken Biryani">
+                    <span class="spice-indicator"><i class="fas fa-pepper-hot"></i> Medium</span>
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Chicken Biryani</h3>
+                        <span class="menu-card-price">Rs. 1,200</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Authentic Hyderabadi style biryani with tender chicken, fragrant basmati rice, and aromatic spices. Served with raita.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="1" 
+                            data-name="Chicken Biryani" 
+                            data-price="1200"
+                            data-image="https://kimi-web-img.moonshot.cn/img/static.vecteezy.com/8028fa983261ffdb0ad9ed02c8466a0ba7f94b1c.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="biryani">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/img.freepik.com/f232958d0b4c9fada65d6a68bdc56e664b330976.jpg" alt="Egg Biryani">
+                    <span class="spice-indicator" style="background: rgba(34, 197, 94, 0.9);"><i class="fas fa-leaf"></i> Mild</span>
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Egg Biryani</h3>
+                        <span class="menu-card-price">Rs. 900</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Fluffy basmati rice cooked with boiled eggs, caramelized onions, and mild spices. Perfect for egg lovers.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="2" 
+                            data-name="Egg Biryani" 
+                            data-price="900"
+                            data-image="https://kimi-web-img.moonshot.cn/img/img.freepik.com/f232958d0b4c9fada65d6a68bdc56e664b330976.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="biryani">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static.vecteezy.com/8028fa983261ffdb0ad9ed02c8466a0ba7f94b1c.jpg" alt="Tandoori Biryani">
+                    <span class="spice-indicator"><i class="fas fa-fire"></i> Hot</span>
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Tandoori Chicken Biryani</h3>
+                        <span class="menu-card-price">Rs. 1,500</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Smoky tandoori chicken pieces layered with saffron-infused rice. A perfect blend of tandoor and biryani.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="3" 
+                            data-name="Tandoori Chicken Biryani" 
+                            data-price="1500"
+                            data-image="https://kimi-web-img.moonshot.cn/img/static.vecteezy.com/8028fa983261ffdb0ad9ed02c8466a0ba7f94b1c.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Rice Items -->
+            <div class="menu-card" data-category="rice">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.theflavorbender.com/e4eff3ca83f141ae0f4198943bf2439af55f3d80.jpg" alt="Chicken Fried Rice">
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Chicken Fried Rice</h3>
+                        <span class="menu-card-price">Rs. 850</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Classic Chinese-style fried rice with tender chicken cubes, vegetables, eggs, and soy sauce.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="4" 
+                            data-name="Chicken Fried Rice" 
+                            data-price="850"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.theflavorbender.com/e4eff3ca83f141ae0f4198943bf2439af55f3d80.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="rice">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.hungrylankan.com/6a6985f7a2702847a4303ba08b5142eb6d45d791.jpeg" alt="Chicken Kottu">
+                    <span class="spice-indicator"><i class="fas fa-pepper-hot"></i> Medium</span>
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Chicken Kottu Roti</h3>
+                        <span class="menu-card-price">Rs. 950</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Sri Lankan street food favorite! Godamba roti chopped and stir-fried with chicken, vegetables, eggs, and spices.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="6" 
+                            data-name="Chicken Kottu Roti" 
+                            data-price="950"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.hungrylankan.com/6a6985f7a2702847a4303ba08b5142eb6d45d791.jpeg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="rice">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.theflavorbender.com/e4eff3ca83f141ae0f4198943bf2439af55f3d80.jpg" alt="Seafood Rice">
+                    <span class="spice-indicator"><i class="fas fa-pepper-hot"></i> Spicy</span>
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Seafood Fried Rice</h3>
+                        <span class="menu-card-price">Rs. 1,100</span>
+                    </div>
+                    <p class="menu-card-description">
+                        A seafood lover's delight with prawns, cuttlefish, crab meat, and fish stir-fried with rice and chili.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="5" 
+                            data-name="Seafood Fried Rice" 
+                            data-price="1100"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.theflavorbender.com/e4eff3ca83f141ae0f4198943bf2439af55f3d80.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bread Items -->
+            <div class="menu-card" data-category="bread">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg" alt="Butter Naan">
+                    <span class="spice-indicator" style="background: rgba(34, 197, 94, 0.9);"><i class="fas fa-leaf"></i> Veg</span>
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Butter Naan</h3>
+                        <span class="menu-card-price">Rs. 300</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Soft and fluffy leavened bread baked in tandoor, brushed generously with butter.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="7" 
+                            data-name="Butter Naan" 
+                            data-price="300"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="bread">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg" alt="Garlic Naan">
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Garlic Naan</h3>
+                        <span class="menu-card-price">Rs. 350</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Naan topped with fresh garlic, coriander, and butter. Aromatic and delicious.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="8" 
+                            data-name="Garlic Naan" 
+                            data-price="350"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="bread">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg" alt="Cheese Naan">
+                    <span class="spice-indicator" style="background: rgba(34, 197, 94, 0.9);"><i class="fas fa-leaf"></i> Veg</span>
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Cheese Naan</h3>
+                        <span class="menu-card-price">Rs. 450</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Naan stuffed with a blend of melted cheeses. Perfect for cheese lovers.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="9" 
+                            data-name="Cheese Naan" 
+                            data-price="450"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Curry Items -->
+            <div class="menu-card" data-category="curry">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.theflavorbender.com/e4eff3ca83f141ae0f4198943bf2439af55f3d80.jpg" alt="Chicken Curry">
+                    <span class="spice-indicator"><i class="fas fa-fire"></i> Hot</span>
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Sri Lankan Chicken Curry</h3>
+                        <span class="menu-card-price">Rs. 700</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Traditional Sri Lankan curry with coconut milk, curry leaves, and aromatic spices.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="10" 
+                            data-name="Chicken Curry" 
+                            data-price="700"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.theflavorbender.com/e4eff3ca83f141ae0f4198943bf2439af55f3d80.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="curry">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.itihaas.co.uk/e8e5e9175d445b18ec10a4f8aad7b4d3011f1794.jpg" alt="Butter Chicken">
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Butter Chicken</h3>
+                        <span class="menu-card-price">Rs. 950</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Creamy tomato-based curry with tender tandoori chicken pieces. Mild and rich.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="11" 
+                            data-name="Butter Chicken" 
+                            data-price="950"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.itihaas.co.uk/e8e5e9175d445b18ec10a4f8aad7b4d3011f1794.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="curry">
+                <div class="menu-card-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg" alt="Sri Lankan Thali">
+                </div>
+                <div class="menu-card-content">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-title">Sri Lankan Thali</h3>
+                        <span class="menu-card-price">Rs. 1,200</span>
+                    </div>
+                    <p class="menu-card-description">
+                        Complete meal with steamed rice, 3 vegetable/meat curries, papadum, pickle, and dessert.
+                    </p>
+                    <button class="add-to-cart" 
+                            data-id="13" 
+                            data-name="Sri Lankan Thali" 
+                            data-price="1200"
+                            data-image="https://kimi-web-img.moonshot.cn/img/www.dwarakaorganic.com/83bdc4ce87bd13262a92396c95d471d6f79d447a.jpg">
+                        <i class="fas fa-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 3rem 0;">
+            <a href="order.html" class="btn btn-primary btn-large">
+                <i class="fas fa-shopping-cart"></i> Proceed to Order
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">LEGEND<span>.</span></a>
+                    <p>Serving authentic Indian and Sri Lankan cuisine since 2015.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="order.html">Order</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> 077 787 2587</p>
+                    <p><i class="fas fa-map-marker-alt"></i> A1, Kalagedihena</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Legend Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/94777872587" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Category Filtering
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const menuCards = document.querySelectorAll('.menu-card');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.dataset.category;
+
+                menuCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

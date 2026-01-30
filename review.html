@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews | Legend Restaurant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        .reviews-hero {
+            background: linear-gradient(rgba(10,10,10,0.85), rgba(10,10,10,0.9));
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reviews-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .rating-overview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .rating-big {
+            text-align: center;
+        }
+
+        .rating-number {
+            font-family: var(--font-primary);
+            font-size: 5rem;
+            color: var(--color-gold);
+            line-height: 1;
+        }
+
+        .rating-stars {
+            color: var(--color-gold);
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .rating-count {
+            color: var(--color-text-secondary);
+        }
+
+        .rating-bars {
+            min-width: 300px;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stars-label {
+            min-width: 60px;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: var(--color-bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-gold);
+            border-radius: 4px;
+        }
+
+        .write-review {
+            background: var(--color-bg-secondary);
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+            border: 1px solid var(--color-border);
+        }
+
+        .write-review h3 {
+            color: var(--color-gold);
+            margin-bottom: 1rem;
+        }
+
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .review-card:nth-child(1) { animation-delay: 0.1s; }
+        .review-card:nth-child(2) { animation-delay: 0.2s; }
+        .review-card:nth-child(3) { animation-delay: 0.3s; }
+        .review-card:nth-child(4) { animation-delay: 0.4s; }
+        .review-card:nth-child(5) { animation-delay: 0.5s; }
+        .review-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-gold);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--color-black);
+            font-size: 1.2rem;
+        }
+
+        .verified-badge {
+            color: var(--color-gold);
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .review-date {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        .review-stars {
+            color: var(--color-gold);
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .review-actions {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .review-actions button {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .review-actions button:hover {
+            color: var(--color-gold);
+        }
+
+        @media (max-width: 768px) {
+            .rating-overview {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .reviews-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">LEGEND<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="reviews.html" class="active">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="btn-icon theme-toggle" id="theme-toggle">
+                    <i class="fas fa-sun sun-icon"></i>
+                    <i class="fas fa-moon moon-icon"></i>
+                </button>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="reviews-hero">
+        <div class="container">
+            <span class="section-subtitle" style="color: var(--color-gold); justify-content: center;">
+                Testimonials
+            </span>
+            <h1 class="section-title" style="color: white; font-size: 3rem;">Customer Reviews</h1>
+            
+            <div class="rating-overview">
+                <div class="rating-big">
+                    <div class="rating-number">4.3</div>
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="rating-count">146 Google Reviews</div>
+                </div>
+
+                <div class="rating-bars">
+                    <div class="rating-bar">
+                        <span class="stars-label">5 stars</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="stars-label">4 stars</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="stars-label">3 stars</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 6%"></div>
+                        </div>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="stars-label">2 stars</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 3%"></div>
+                        </div>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="stars-label">1 star</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 1%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="write-review reveal">
+                <h3>Love our food?</h3>
+                <p style="margin-bottom: 1.5rem;">Share your experience with others</p>
+                <a href="https://g.page/legend-restaurant/review" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-google"></i> Write a Google Review
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="reviews-container">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">AR</div>
+                            <div>
+                                <h4>Ahmed R. <i class="fas fa-check-circle verified-badge"></i></h4>
+                                <span class="review-date">15 January 2025</span>
+                            </div>
+                        </div>
+                        <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 24px; opacity: 0.6;">
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        Best biryani in Kalagedihena! The flavors are authentic Hyderabadi style, and the portions are generous. 
+                        The raita is perfectly spiced. A must-visit if you're on the A1 highway. Parking is available and 
+                        the service is quick even during rush hours.
+                    </p>
+                    <div class="review-actions">
+                        <button><i class="far fa-thumbs-up"></i> Helpful (12)</button>
+                        <button><i class="far fa-comment"></i> Comment</button>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">PS</div>
+                            <div>
+                                <h4>Priya S. <i class="fas fa-check-circle verified-badge"></i></h4>
+                                <span class="review-date">20 January 2025</span>
+                            </div>
+                        </div>
+                        <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 24px; opacity: 0.6;">
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        Great ambiance and friendly staff. The kottu roti was amazing - lots of flavor and perfectly spicy. 
+                        The restaurant is clean and family-friendly. Would definitely recommend for anyone looking for 
+                        authentic Sri Lankan street food in a comfortable setting.
+                    </p>
+                    <div class="review-actions">
+                        <button><i class="far fa-thumbs-up"></i> Helpful (8)</button>
+                        <button><i class="far fa-comment"></i> Comment</button>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">NF</div>
+                            <div>
+                                <h4>Nimal F. <i class="fas fa-check-circle verified-badge"></i></h4>
+                                <span class="review-date">22 January 2025</span>
+                            </div>
+                        </div>
+                        <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 24px; opacity: 0.6;">
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        Perfect place for family dinners. Love their butter chicken - creamy, rich, and not too sweet 
+                        like some other places. The naan bread is fresh from the tandoor. Prices are reasonable for 
+                        the quality you get. Keep up the good work!
+                    </p>
+                    <div class="review-actions">
+                        <button><i class="far fa-thumbs-up"></i> Helpful (15)</button>
+                        <button><i class="far fa-comment"></i> Comment</button>
+                    </div>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">KM</div>
+                            <div>
+                                <h4>Kavita M.</h4>
+                                <span class="review-date">25 January 2025</span>
+                            </div>
+                        </div>
+                        <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 24px; opacity: 0.6;">
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        Good food, reasonable prices. The seafood fried rice was delicious with generous portions of 
+                        prawns and cuttlefish. Waiting time was a bit long during Friday evening rush, but worth it. 
+                        Would suggest calling ahead for large orders.
+                    </p>
+                    <div class="review-actions">
+                        <button><i class="far fa-thumbs-up"></i> Helpful (6)</button>
+                        <button><i class="far fa-comment"></i> Comment</button>
+                    </div>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">RP</div>
+                            <div>
+                                <h4>Rohan P. <i class="fas fa-check-circle verified-badge"></i></h4>
+                                <span class="review-date">28 January 2025</span>
+                            </div>
+                        </div>
+                        <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 24px; opacity: 0.6;">
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        The tandoori chicken biryani is a must-try! The smoky flavor from the tandoor really makes 
+                        a difference. Excellent service and very clean premises. This is now our regular stop when 
+                        traveling to Kandy. The owner personally ensures quality.
+                    </p>
+                    <div class="review-actions">
+                        <button><i class="far fa-thumbs-up"></i> Helpful (22)</button>
+                        <button><i class="far fa-comment"></i> Comment</button>
+                    </div>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">SL</div>
+                            <div>
+                                <h4>Samanthi L.</h4>
+                                <span class="review-date">29 January 2025</span>
+                            </div>
+                        </div>
+                        <img src="https://www.google.com/favicon.ico" alt="Google" style="width: 24px; opacity: 0.6;">
+                    </div>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="review-text">
+                        Lovely restaurant with authentic Sri Lankan and Indian cuisine. The thali is great value for 
+                        money - you get rice, multiple curries, papadum, and dessert. Perfect for vegetarians too. 
+                        The dal makhani is creamy and well-spiced. Highly recommended!
+                    </p>
+                    <div class="review-actions">
+                        <button><i class="far fa-thumbs-up"></i> Helpful (9)</button>
+                        <button><i class="far fa-comment"></i> Comment</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="btn btn-secondary" onclick="loadMoreReviews()">
+                    <i class="fas fa-spinner"></i> Load More Reviews
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Legend Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/94777872587" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+    <script>
+        function loadMoreReviews() {
+            alert('Loading more reviews from Google...');
+            // In production, this would fetch from API
+        }
+    </script>
+</body>
+</html>
